@@ -2,7 +2,8 @@ import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
 import { BookOpen, Eye } from 'lucide-react'
 
-export default async function ActivitiesPage({ searchParams }: { searchParams: { subject?: string } }) {
+export default async function ActivitiesPage({ searchParams }: { searchParams: Promise<{ subject?: string }> }) {
+  const params = await searchParams
   const supabase = await createClient()
   
   let query = supabase
@@ -11,8 +12,8 @@ export default async function ActivitiesPage({ searchParams }: { searchParams: {
     .eq('is_published', true)
     .order('created_at', { ascending: false })
 
-  if (searchParams.subject) {
-    query = query.eq('subject_id', searchParams.subject)
+  if (params.subject) {
+    query = query.eq('subject_id', params.subject)
   }
 
   const { data: activities } = await query
@@ -27,14 +28,14 @@ export default async function ActivitiesPage({ searchParams }: { searchParams: {
 
       {/* Subject Filter */}
       <div className="flex gap-2 flex-wrap">
-        <Link href="/student/activities" className={`px-4 py-2 rounded-xl border transition ${!searchParams.subject ? 'bg-primary text-white border-primary' : 'border-border hover:border-primary'}`}>
+        <Link href="/student/activities" className={`px-4 py-2 rounded-xl border transition ${!params.subject ? 'bg-primary text-white border-primary' : 'border-border hover:border-primary'}`}>
           All Subjects
         </Link>
         {subjects?.map((subject) => (
           <Link
             key={subject.id}
             href={`/student/activities?subject=${subject.id}`}
-            className={`px-4 py-2 rounded-xl border transition ${searchParams.subject === subject.id ? 'bg-primary text-white border-primary' : 'border-border hover:border-primary'}`}
+            className={`px-4 py-2 rounded-xl border transition ${params.subject === subject.id ? 'bg-primary text-white border-primary' : 'border-border hover:border-primary'}`}
           >
             {subject.name}
           </Link>
