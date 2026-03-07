@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { LayoutDashboard, Upload, MessageCircle, LogOut } from 'lucide-react'
 
 export default async function TeacherLayout({ children }: { children: React.ReactNode }) {
@@ -26,10 +27,10 @@ export default async function TeacherLayout({ children }: { children: React.Reac
   return (
     <div className="flex h-screen bg-muted">
       <aside className="w-64 bg-white border-r border-border flex flex-col">
-        <div className="p-6 border-b border-border">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-bold">Q</div>
-            <span className="text-xl font-bold">Q'Vault</span>
+        <div className="p-8 border-b border-border">
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/qvault logo (2).png" alt="Q'Vault" width={80} height={80} className="rounded-xl" />
+            <span className="text-2xl font-bold">Q'Vault</span>
           </Link>
         </div>
 

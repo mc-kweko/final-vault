@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, BookOpen, Users, Award, Zap } from 'lucide-react'
 
 export default function HomePage() {
@@ -6,11 +7,11 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Header */}
       <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-border z-50">
-        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-lg">Q</div>
-            <span className="text-xl font-bold">Q'Vault</span>
-          </div>
+        <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/qvault logo (2).png" alt="Q'Vault" width={80} height={80} className="rounded-xl" />
+            <span className="text-2xl font-bold">Q'Vault</span>
+          </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link href="/about" className="text-sm font-medium hover:text-primary transition">About</Link>
             <Link href="/resources" className="text-sm font-medium hover:text-primary transition">Resources</Link>

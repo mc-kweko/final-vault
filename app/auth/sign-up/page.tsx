@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 
@@ -41,9 +42,9 @@ export default function SignUpPage() {
     <div className="min-h-screen flex items-center justify-center px-6 bg-muted py-12">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white font-bold text-xl">Q</div>
-            <span className="text-2xl font-bold">Q'Vault</span>
+          <Link href="/" className="inline-flex items-center gap-3 mb-8">
+            <Image src="/qvault logo (2).png" alt="Q'Vault" width={96} height={96} className="rounded-2xl" />
+            <span className="text-3xl font-bold">Q'Vault</span>
           </Link>
           <h1 className="text-3xl font-bold mb-2">Create Account</h1>
           <p className="text-muted-foreground">Start your learning journey today</p>
