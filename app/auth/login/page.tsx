@@ -40,9 +40,12 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-6 bg-muted">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-3 mb-8">
+          <Link href="/" className="inline-flex flex-col items-center gap-2 mb-8">
             <Image src="/qvault logo (2).png" alt="Q'Vault" width={96} height={96} className="rounded-2xl" />
-            <span className="text-3xl font-bold">Q'Vault</span>
+            <div>
+              <div className="text-3xl font-bold">Q'Vault</div>
+              <div className="text-sm text-muted-foreground font-medium tracking-wide mt-1">Practice Makes Perfect !</div>
+            </div>
           </Link>
           <h1 className="text-3xl font-bold mb-2">Welcome Back</h1>
           <p className="text-muted-foreground">Sign in to continue your learning journey</p>

@@ -9,7 +9,10 @@ export default function ContactPage() {
         <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
             <Image src="/qvault logo (2).png" alt="Q'Vault" width={80} height={80} className="rounded-xl" />
-            <span className="text-2xl font-bold">Q'Vault</span>
+            <div>
+              <div className="text-2xl font-bold">Q'Vault</div>
+              <div className="text-xs text-muted-foreground font-medium tracking-wide">Practice Makes Perfect !</div>
+            </div>
           </Link>
           <Link href="/" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition">
             <ArrowLeft className="w-4 h-4" />
