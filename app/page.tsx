@@ -85,20 +85,25 @@ export default function HomePage() {
                 index === currentSlide ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
               }`}
             >
-              <div className={`absolute inset-0 ${slide.bg}`}>
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent" />
-              </div>
+              <Image 
+                src={index === 0 ? '/Digital-Pathways-AI-Education-Day-780x439.jpg' : index === 1 ? '/innovative-learning-approaches-870x570.jpg' : '/Technology-is-Education.jpg'}
+                alt={slide.title}
+                fill
+                className="object-cover"
+                priority={index === 0}
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
               <div className="relative max-w-7xl mx-auto px-6 h-full flex items-center">
                 <div className={`max-w-2xl transform transition-all duration-1000 delay-300 ${
                   index === currentSlide ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
                 }`}>
-                  <div className="inline-block px-4 py-2 bg-white/90 backdrop-blur-sm rounded-full text-sm font-medium mb-6 animate-pulse">
+                  <div className="inline-block px-4 py-2 bg-white/95 backdrop-blur-sm rounded-full text-sm font-medium mb-6 text-primary shadow-lg">
                     🎓 Uganda's #1 Learning Platform
                   </div>
-                  <h1 className="text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                  <h1 className="text-6xl font-bold mb-6 leading-tight text-white drop-shadow-2xl">
                     {slide.title}
                   </h1>
-                  <p className="text-xl text-foreground/80 mb-8 leading-relaxed">{slide.subtitle}</p>
+                  <p className="text-xl text-white/95 mb-8 leading-relaxed drop-shadow-lg">{slide.subtitle}</p>
                   <div className="flex gap-4">
                     <Link href="/auth/sign-up" className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all">
                       Start Learning Free 
@@ -167,62 +172,77 @@ export default function HomePage() {
             
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               {/* Sciences */}
-              <div className="group bg-white border border-border rounded-3xl p-8 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                  <span className="text-3xl">🔬</span>
+              <div className="group relative bg-white border-2 border-border rounded-3xl overflow-hidden hover:shadow-2xl hover:scale-105 hover:border-blue-200 transition-all duration-300">
+                <div className="absolute inset-0 opacity-[0.03]">
+                  <Image src="/Digital-Pathways-AI-Education-Day-780x439.jpg" alt="Sciences" fill className="object-cover" />
                 </div>
-                <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">Sciences</h3>
-                <div className="space-y-3">
-                  {subjects.sciences.map((subject, index) => (
-                    <Link
-                      key={subject}
-                      href="/auth/sign-up"
-                      className="block px-5 py-3.5 bg-gradient-to-r from-muted to-muted/50 rounded-xl hover:from-blue-50 hover:to-blue-100 hover:text-blue-600 transition-all font-medium transform hover:translate-x-2"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                    >
-                      {subject}
-                    </Link>
-                  ))}
+                <div className="relative p-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                    <span className="text-3xl">🔬</span>
+                  </div>
+                  <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-blue-500 bg-clip-text text-transparent">Sciences</h3>
+                  <div className="space-y-3">
+                    {subjects.sciences.map((subject, index) => (
+                      <Link
+                        key={subject}
+                        href="/auth/sign-up"
+                        className="block px-5 py-3.5 bg-gradient-to-r from-muted to-muted/50 rounded-xl hover:from-blue-50 hover:to-blue-100 hover:text-blue-600 transition-all font-medium transform hover:translate-x-2"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        {subject}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               {/* Humanities */}
-              <div className="group bg-white border border-border rounded-3xl p-8 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                  <span className="text-3xl">🌍</span>
+              <div className="group relative bg-white border-2 border-border rounded-3xl overflow-hidden hover:shadow-2xl hover:scale-105 hover:border-amber-200 transition-all duration-300">
+                <div className="absolute inset-0 opacity-[0.03]">
+                  <Image src="/innovative-learning-approaches-870x570.jpg" alt="Humanities" fill className="object-cover" />
                 </div>
-                <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">Humanities</h3>
-                <div className="space-y-3">
-                  {subjects.humanities.map((subject, index) => (
-                    <Link
-                      key={subject}
-                      href="/auth/sign-up"
-                      className="block px-5 py-3.5 bg-gradient-to-r from-muted to-muted/50 rounded-xl hover:from-amber-50 hover:to-amber-100 hover:text-amber-600 transition-all font-medium transform hover:translate-x-2"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                    >
-                      {subject}
-                    </Link>
-                  ))}
+                <div className="relative p-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                    <span className="text-3xl">🌍</span>
+                  </div>
+                  <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">Humanities</h3>
+                  <div className="space-y-3">
+                    {subjects.humanities.map((subject, index) => (
+                      <Link
+                        key={subject}
+                        href="/auth/sign-up"
+                        className="block px-5 py-3.5 bg-gradient-to-r from-muted to-muted/50 rounded-xl hover:from-amber-50 hover:to-amber-100 hover:text-amber-600 transition-all font-medium transform hover:translate-x-2"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        {subject}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               {/* Languages */}
-              <div className="group bg-white border border-border rounded-3xl p-8 hover:shadow-2xl hover:scale-105 transition-all duration-300">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
-                  <span className="text-3xl">📚</span>
+              <div className="group relative bg-white border-2 border-border rounded-3xl overflow-hidden hover:shadow-2xl hover:scale-105 hover:border-emerald-200 transition-all duration-300">
+                <div className="absolute inset-0 opacity-[0.03]">
+                  <Image src="/digital-education-tools-for-teachers-and-studentswebp.webp" alt="Languages" fill className="object-cover" />
                 </div>
-                <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">Languages</h3>
-                <div className="space-y-3">
-                  {subjects.languages.map((subject, index) => (
-                    <Link
-                      key={subject}
-                      href="/auth/sign-up"
-                      className="block px-5 py-3.5 bg-gradient-to-r from-muted to-muted/50 rounded-xl hover:from-emerald-50 hover:to-emerald-100 hover:text-emerald-600 transition-all font-medium transform hover:translate-x-2"
-                      style={{ animationDelay: `${index * 50}ms` }}
-                    >
-                      {subject}
-                    </Link>
-                  ))}
+                <div className="relative p-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
+                    <span className="text-3xl">📚</span>
+                  </div>
+                  <h3 className="text-3xl font-bold mb-6 bg-gradient-to-r from-emerald-600 to-emerald-500 bg-clip-text text-transparent">Languages</h3>
+                  <div className="space-y-3">
+                    {subjects.languages.map((subject, index) => (
+                      <Link
+                        key={subject}
+                        href="/auth/sign-up"
+                        className="block px-5 py-3.5 bg-gradient-to-r from-muted to-muted/50 rounded-xl hover:from-emerald-50 hover:to-emerald-100 hover:text-emerald-600 transition-all font-medium transform hover:translate-x-2"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        {subject}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -299,7 +319,13 @@ export default function HomePage() {
 
               {/* Media Placeholder - Replace with actual image/video */}
               <div className="relative bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20 rounded-3xl overflow-hidden group hover:shadow-2xl transition-all">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <Image 
+                  src="/empowerment through education.jpg"
+                  alt="Quality Education"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
                 <div className="relative h-full min-h-[400px] flex flex-col items-center justify-center p-10 text-center">
                   <div className="w-24 h-24 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                     <Play className="w-12 h-12 text-primary" />
@@ -309,7 +335,6 @@ export default function HomePage() {
                   <button className="px-8 py-3 bg-white text-primary rounded-xl font-semibold hover:scale-105 transition-all">
                     Play Video
                   </button>
-                  {/* Replace this div with: <Image src="/your-image.jpg" alt="..." fill className="object-cover" /> */}
                 </div>
               </div>
             </div>
