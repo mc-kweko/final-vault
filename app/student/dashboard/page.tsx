@@ -1,300 +1,101 @@
-import { createClient } from "@/lib/supabase/server"
-import Link from "next/link"
-import { 
-  BookOpen, 
-  FileText, 
-  FolderKanban, 
-  Bookmark, 
-  TrendingUp,
-  Clock,
-  ArrowRight,
-  Sparkles
-} from "lucide-react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-
-async function getQuote() {
-  const supabase = await createClient()
-  const { data } = await supabase
-    .from("quotes")
-    .select("*")
-    .order("id", { ascending: false })
-    .limit(10)
-  
-  if (data && data.length > 0) {
-    const randomIndex = Math.floor(Math.random() * data.length)
-    return data[randomIndex]
-  }
-  return null
-}
-
-async function getSubjects() {
-  const supabase = await createClient()
-  const { data } = await supabase
-    .from("subjects")
-    .select("*")
-    .order("name")
-  return data || []
-}
-
-async function getRecentActivity(userId: string) {
-  const supabase = await createClient()
-  const { data } = await supabase
-    .from("bookmarks")
-    .select(`
-      *,
-      activities (id, title, subject_id)
-    `)
-    .eq("user_id", userId)
-    .order("created_at", { ascending: false })
-    .limit(3)
-  return data || []
-}
+import { createClient } from '@/lib/supabase/server'
+import Link from 'next/link'
+import { BookOpen, FileText, Bookmark, TrendingUp, ArrowRight } from 'lucide-react'
 
 export default async function StudentDashboard() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
-  
-  const [quote, subjects] = await Promise.all([
-    getQuote(),
-    getSubjects(),
-  ])
 
-  const recentActivity = user ? await getRecentActivity(user.id) : []
+  const { data: subjects } = await supabase.from('subjects').select('*').order('name')
+  const { data: bookmarks } = await supabase
+    .from('bookmarks')
+    .select('*, activities(title)')
+    .eq('user_id', user!.id)
+    .limit(5)
 
   const quickLinks = [
-    { 
-      name: "Activities of Integration", 
-      description: "Practice with curriculum-aligned activities",
-      href: "/student/activities", 
-      icon: BookOpen,
-      color: "text-sky-600",
-      bgColor: "bg-sky-50"
-    },
-    { 
-      name: "UCE Past Papers", 
-      description: "Access previous examination papers",
-      href: "/student/past-papers", 
-      icon: FileText,
-      color: "text-rose-600",
-      bgColor: "bg-rose-50"
-    },
-    { 
-      name: "Project Work", 
-      description: "Project templates and guidelines",
-      href: "/student/projects", 
-      icon: FolderKanban,
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50"
-    },
-    { 
-      name: "My Bookmarks", 
-      description: "Quick access to saved resources",
-      href: "/student/bookmarks", 
-      icon: Bookmark,
-      color: "text-amber-600",
-      bgColor: "bg-amber-50"
-    },
+    { name: 'Activities', href: '/student/activities', icon: BookOpen, color: 'bg-blue-500' },
+    { name: 'Past Papers', href: '/student/past-papers', icon: FileText, color: 'bg-rose-500' },
+    { name: 'Bookmarks', href: '/student/bookmarks', icon: Bookmark, color: 'bg-amber-500' },
   ]
 
-  const subjectsByCategory = {
-    sciences: subjects.filter(s => s.category === "sciences"),
-    humanities: subjects.filter(s => s.category === "humanities"),
-    languages: subjects.filter(s => s.category === "languages"),
-  }
-
   return (
-    <div className="space-y-6">
-      {/* Welcome section with quote */}
-      <div className="rounded-xl bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h1 className="text-2xl font-bold text-foreground">Welcome back!</h1>
-            <p className="text-muted-foreground mt-1">
-              Continue your learning journey with Q{"'"}Vault
-            </p>
-          </div>
-          {quote && (
-            <div className="flex items-start gap-3 max-w-md rounded-lg bg-card p-4 shadow-sm">
-              <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm italic text-foreground">{`"${quote.text}"`}</p>
-                {quote.author && (
-                  <p className="text-xs text-muted-foreground mt-1">— {quote.author}</p>
-                )}
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-bold mb-2">Welcome Back!</h1>
+        <p className="text-muted-foreground">Continue your learning journey</p>
+      </div>
+
+      {/* Quick Links */}
+      <div className="grid md:grid-cols-3 gap-6">
+        {quickLinks.map((link) => (
+          <Link key={link.name} href={link.href} className="group">
+            <div className="bg-white border border-border rounded-2xl p-6 hover:shadow-lg transition">
+              <div className={`w-12 h-12 ${link.color} rounded-xl flex items-center justify-center text-white mb-4`}>
+                <link.icon className="w-6 h-6" />
               </div>
+              <h3 className="font-bold text-lg mb-1 flex items-center justify-between">
+                {link.name}
+                <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition" />
+              </h3>
+              <p className="text-sm text-muted-foreground">Access {link.name.toLowerCase()}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Subjects */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Subjects</h2>
+        <div className="grid md:grid-cols-4 gap-4">
+          {subjects?.slice(0, 8).map((subject) => (
+            <Link key={subject.id} href={`/student/activities?subject=${subject.id}`}>
+              <div className="bg-white border border-border rounded-xl p-4 hover:shadow-md transition">
+                <div className="font-semibold">{subject.name}</div>
+                <div className="text-xs text-muted-foreground mt-1">{subject.category}</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Recent Bookmarks */}
+      <div>
+        <h2 className="text-2xl font-bold mb-4">Recent Bookmarks</h2>
+        <div className="bg-white border border-border rounded-2xl divide-y divide-border">
+          {bookmarks && bookmarks.length > 0 ? (
+            bookmarks.map((bookmark: any) => (
+              <div key={bookmark.id} className="p-4 flex items-center gap-3">
+                <Bookmark className="w-5 h-5 text-amber-500" />
+                <div className="flex-1">
+                  <div className="font-medium">{bookmark.activities?.title}</div>
+                  <div className="text-sm text-muted-foreground">Bookmarked activity</div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="p-8 text-center text-muted-foreground">
+              <Bookmark className="w-12 h-12 mx-auto mb-3 opacity-20" />
+              <p>No bookmarks yet</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Quick Links */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {quickLinks.map((link) => (
-          <Link key={link.name} href={link.href} className="group">
-            <Card className="h-full transition-all hover:shadow-md hover:border-primary/20">
-              <CardHeader className="pb-2">
-                <div className={`inline-flex h-10 w-10 items-center justify-center rounded-lg ${link.bgColor}`}>
-                  <link.icon className={`h-5 w-5 ${link.color}`} />
-                </div>
-              </CardHeader>
-              <CardContent>
-                <CardTitle className="text-base flex items-center justify-between">
-                  {link.name}
-                  <ArrowRight className="h-4 w-4 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0 text-muted-foreground" />
-                </CardTitle>
-                <CardDescription className="text-sm mt-1">
-                  {link.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          </Link>
+      {/* Stats */}
+      <div className="grid md:grid-cols-4 gap-6">
+        {[
+          { label: 'Activities Completed', value: '0', icon: TrendingUp },
+          { label: 'Papers Attempted', value: '0', icon: FileText },
+          { label: 'Bookmarks', value: bookmarks?.length || 0, icon: Bookmark },
+          { label: 'Downloads', value: '0', icon: BookOpen },
+        ].map((stat) => (
+          <div key={stat.label} className="bg-white border border-border rounded-xl p-6">
+            <stat.icon className="w-8 h-8 text-primary mb-3" />
+            <div className="text-3xl font-bold mb-1">{stat.value}</div>
+            <div className="text-sm text-muted-foreground">{stat.label}</div>
+          </div>
         ))}
-      </div>
-
-      {/* Subjects by Category */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        {/* Sciences */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-sky-500" />
-              Sciences
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {subjectsByCategory.sciences.map((subject) => (
-                <Link
-                  key={subject.id}
-                  href={`/student/activities?subject=${subject.id}`}
-                  className="flex items-center justify-between rounded-lg px-3 py-2 hover:bg-secondary transition-colors"
-                >
-                  <span className="text-sm font-medium">{subject.name}</span>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Humanities */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-amber-500" />
-              Humanities
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {subjectsByCategory.humanities.map((subject) => (
-                <Link
-                  key={subject.id}
-                  href={`/student/activities?subject=${subject.id}`}
-                  className="flex items-center justify-between rounded-lg px-3 py-2 hover:bg-secondary transition-colors"
-                >
-                  <span className="text-sm font-medium">{subject.name}</span>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Languages */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <div className="h-2 w-2 rounded-full bg-emerald-500" />
-              Languages
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-2">
-              {subjectsByCategory.languages.map((subject) => (
-                <Link
-                  key={subject.id}
-                  href={`/student/activities?subject=${subject.id}`}
-                  className="flex items-center justify-between rounded-lg px-3 py-2 hover:bg-secondary transition-colors"
-                >
-                  <span className="text-sm font-medium">{subject.name}</span>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground" />
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Stats and Recent Activity */}
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Progress Stats */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              Your Progress
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                <p className="text-3xl font-bold text-foreground">0</p>
-                <p className="text-sm text-muted-foreground">Activities Completed</p>
-              </div>
-              <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                <p className="text-3xl font-bold text-foreground">0</p>
-                <p className="text-sm text-muted-foreground">Papers Attempted</p>
-              </div>
-              <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                <p className="text-3xl font-bold text-foreground">{recentActivity.length}</p>
-                <p className="text-sm text-muted-foreground">Bookmarks</p>
-              </div>
-              <div className="rounded-lg bg-secondary/50 p-4 text-center">
-                <p className="text-3xl font-bold text-foreground">0</p>
-                <p className="text-sm text-muted-foreground">Downloads</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Recent Activity */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Clock className="h-5 w-5 text-primary" />
-              Recent Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            {recentActivity.length > 0 ? (
-              <div className="space-y-3">
-                {recentActivity.map((item) => (
-                  <div key={item.id} className="flex items-center gap-3 rounded-lg bg-secondary/50 p-3">
-                    <Bookmark className="h-4 w-4 text-muted-foreground" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium truncate">
-                        {item.activities?.title || "Bookmarked item"}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        Bookmarked recently
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-8">
-                <p className="text-muted-foreground text-sm">No recent activity yet</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Start exploring activities to see your progress here
-                </p>
-              </div>
-            )}
-          </CardContent>
-        </Card>
       </div>
     </div>
   )
