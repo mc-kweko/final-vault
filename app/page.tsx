@@ -7,22 +7,34 @@ import { ArrowRight, ChevronLeft, ChevronRight, Play, Star, Users, BookOpen, Awa
 
 const slides = [
   {
-    title: "Excel in Your Studies",
-    subtitle: "Access comprehensive Activities of Integration aligned with Uganda's curriculum",
-    bg: "bg-gradient-to-r from-primary/20 to-accent/20",
-    image: "/placeholder.jpg" // Replace with actual image
+    title: "Find Activities of Integration",
+    subtitle: "Access comprehensive learning activities aligned with Uganda's lower secondary curriculum",
+    image: "/Digital-Pathways-AI-Education-Day-780x439.jpg",
+    link: "#activities"
   },
   {
-    title: "UCE Past Papers",
-    subtitle: "Practice with previous examination papers and marking guides",
-    bg: "bg-gradient-to-r from-blue-500/20 to-primary/20",
-    image: "/placeholder.jpg"
+    title: "Access UCE Past Papers",
+    subtitle: "Practice with previous examination papers and detailed marking guides",
+    image: "/innovative-learning-approaches-870x570.jpg",
+    link: "#past-papers"
   },
   {
-    title: "Learn from Experts",
-    subtitle: "Connect with qualified teachers and get help when you need it",
-    bg: "bg-gradient-to-r from-accent/20 to-amber-500/20",
-    image: "/placeholder.jpg"
+    title: "Get Project Work Guidelines",
+    subtitle: "Comprehensive templates and step-by-step guides for your school projects",
+    image: "/Technology-is-Education.jpg",
+    link: "#project-work"
+  },
+  {
+    title: "Learn From Expert Facilitators",
+    subtitle: "Connect with qualified teachers and get personalized guidance",
+    image: "/empowerment through education.jpg",
+    link: "#expert-facilitators"
+  },
+  {
+    title: "Excel In Your Studies",
+    subtitle: "Join thousands of Ugandan students achieving academic excellence with Q'Vault",
+    image: "/modern education.jpeg",
+    link: "/auth/sign-up"
   }
 ]
 
@@ -46,7 +58,11 @@ export default function HomePage() {
   useEffect(() => {
     setIsVisible(true)
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length)
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % slides.length
+        console.log('Slide transition:', prev, '->', next)
+        return next
+      })
     }, 5000)
     return () => clearInterval(timer)
   }, [])
@@ -79,8 +95,20 @@ export default function HomePage() {
       </header>
 
       <main className="pt-24">
+        {/* Hero Banner */}
+        <section className="bg-gradient-to-br from-primary via-accent to-primary py-12 px-6">
+          <div className="max-w-7xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-bold mb-5 text-white leading-tight drop-shadow-lg">
+              Stay Ahead of the Class With Q'Vault
+            </h1>
+            <p className="text-lg md:text-xl text-white/95 max-w-4xl mx-auto leading-relaxed">
+              Get the latest and most comprehensive study resources in the lower secondary curriculum - with guidelines on how to approach them.
+            </p>
+          </div>
+        </section>
+
         {/* Hero Slideshow */}
-        <section className="relative h-[600px] overflow-hidden">
+        <section className="relative h-[540px] overflow-hidden">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -89,7 +117,7 @@ export default function HomePage() {
               }`}
             >
               <Image 
-                src={index === 0 ? '/Digital-Pathways-AI-Education-Day-780x439.jpg' : index === 1 ? '/innovative-learning-approaches-870x570.jpg' : '/Technology-is-Education.jpg'}
+                src={slide.image}
                 alt={slide.title}
                 fill
                 className="object-cover"
@@ -108,14 +136,13 @@ export default function HomePage() {
                   </h1>
                   <p className="text-xl text-white/95 mb-8 leading-relaxed drop-shadow-lg">{slide.subtitle}</p>
                   <div className="flex gap-4">
-                    <Link href="/auth/sign-up" className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all">
-                      Start Learning Free 
+                    <Link href={slide.link} className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all">
+                      Explore Now
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <button className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur-sm rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all">
-                      <Play className="w-5 h-5" />
-                      Watch Demo
-                    </button>
+                    <Link href="/auth/sign-up" className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur-sm rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all">
+                      Get Started Free
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -124,13 +151,13 @@ export default function HomePage() {
           
           <button
             onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-            className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-lg"
+            className="absolute left-6 bottom-[35%] w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-lg"
           >
             <ChevronLeft className="w-6 h-6" />
           </button>
           <button
             onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-            className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-lg"
+            className="absolute right-6 bottom-[35%] w-14 h-14 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white hover:scale-110 transition-all shadow-lg"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -164,7 +191,7 @@ export default function HomePage() {
         </section>
 
         {/* Find Activities Section */}
-        <section className="py-24 px-6 bg-gradient-to-b from-muted to-background">
+        <section id="activities" className="py-24 px-6 bg-gradient-to-b from-muted to-background">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -252,7 +279,7 @@ export default function HomePage() {
 
             {/* UCE Past Papers & Project Work */}
             <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <Link href="/auth/sign-up" className="group">
+              <Link href="/auth/sign-up" id="past-papers" className="group">
                 <div className="bg-gradient-to-br from-rose-50 to-rose-100 border-2 border-rose-200 rounded-3xl p-10 hover:shadow-2xl hover:scale-105 transition-all h-full">
                   <div className="w-16 h-16 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
                     <span className="text-3xl">📝</span>
@@ -267,7 +294,7 @@ export default function HomePage() {
                 </div>
               </Link>
 
-              <Link href="/auth/sign-up" className="group">
+              <Link href="/auth/sign-up" id="project-work" className="group">
                 <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 border-2 border-indigo-200 rounded-3xl p-10 hover:shadow-2xl hover:scale-105 transition-all h-full">
                   <div className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
                     <span className="text-3xl">📋</span>
@@ -285,7 +312,7 @@ export default function HomePage() {
 
             {/* More Services & Media Section */}
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="bg-white border border-border rounded-3xl p-10 hover:shadow-2xl transition-all">
+              <div id="expert-facilitators" className="bg-white border border-border rounded-3xl p-10 hover:shadow-2xl transition-all">
                 <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">More Services</h3>
                 <div className="space-y-4">
                   <Link href="/auth/sign-up" className="group flex items-center justify-between p-5 bg-gradient-to-r from-muted to-muted/50 rounded-2xl hover:from-primary/10 hover:to-accent/10 transition-all hover:scale-105">
