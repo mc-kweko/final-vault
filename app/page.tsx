@@ -83,8 +83,10 @@ export default function HomePage() {
             </div>
           </Link>
           <div className="hidden md:flex items-center gap-10">
+            <Link href="/" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Home</Link>
             <Link href="/about" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">About</Link>
             <Link href="/resources" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Resources</Link>
+            <Link href="/auth/teacher-application" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Register As Facilitator</Link>
             <Link href="/contact" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Contact</Link>
           </div>
           <div className="flex items-center gap-4">
@@ -136,11 +138,11 @@ export default function HomePage() {
                   </h1>
                   <p className="text-xl text-white/95 mb-8 leading-relaxed drop-shadow-lg">{slide.subtitle}</p>
                   <div className="flex gap-4">
-                    <Link href={slide.link} className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all">
+                    <Link href={slide.link} className="group inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-2xl hover:scale-105 transition-all cursor-pointer">
                       Explore Now
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </Link>
-                    <Link href="/auth/sign-up" className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur-sm rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all">
+                    <Link href="/auth/sign-up" className="inline-flex items-center gap-2 px-8 py-4 bg-white/90 backdrop-blur-sm rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all cursor-pointer">
                       Get Started Free
                     </Link>
                   </div>

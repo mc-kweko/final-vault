@@ -4,6 +4,8 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowLeft, Lock, BookOpen, Clock } from 'lucide-react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 const sampleActivities: Record<string, Array<{title: string, topic: string, difficulty: string}>> = {
   Physics: [
@@ -101,25 +103,7 @@ export default function SubjectActivitiesPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-muted to-background">
-      {/* Header */}
-      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-xl border-b border-border/50 z-50 shadow-lg">
-        <nav className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-4 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-md opacity-0 group-hover:opacity-30 transition-opacity" />
-              <Image src="/qvault logo (2).png" alt="Q'Vault" width={100} height={100} className="rounded-2xl shadow-md group-hover:shadow-xl transition-all relative" />
-            </div>
-            <div>
-              <div className="text-3xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Q'Vault</div>
-              <div className="text-xs text-muted-foreground font-semibold tracking-wider uppercase">Practice Makes Perfect !</div>
-            </div>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link href="/auth/login" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-105">Sign In</Link>
-            <Link href="/auth/sign-up" className="px-7 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-sm font-bold hover:shadow-xl hover:scale-105 transition-all">Get Started</Link>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <main className="pt-32 pb-20 px-6">
         <div className="max-w-6xl mx-auto">
@@ -191,6 +175,7 @@ export default function SubjectActivitiesPage() {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

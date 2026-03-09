@@ -1,39 +1,26 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { ArrowLeft, Mail, Phone, MapPin } from 'lucide-react'
+import { Mail, Phone, MapPin } from 'lucide-react'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
 export default function ContactPage() {
   return (
     <div className="min-h-screen">
-      <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-border z-50">
-        <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3">
-            <Image src="/qvault logo (2).png" alt="Q'Vault" width={80} height={80} className="rounded-xl" />
-            <div>
-              <div className="text-2xl font-bold">Q'Vault</div>
-              <div className="text-xs text-muted-foreground font-medium tracking-wide">Practice Makes Perfect !</div>
-            </div>
-          </Link>
-          <Link href="/" className="flex items-center gap-2 text-sm font-medium hover:text-primary transition">
-            <ArrowLeft className="w-4 h-4" />
-            Back to Home
-          </Link>
-        </nav>
-      </header>
+      <Header />
 
-      <main className="pt-32 pb-20 px-6">
+      <main className="pt-32 pb-20 px-6 bg-gradient-to-b from-muted to-background">
         <div className="max-w-4xl mx-auto space-y-12">
           <div className="text-center">
-            <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
+            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Contact Us</h1>
             <p className="text-xl text-muted-foreground">
               Get in touch with the Q'Vault team
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-white border border-border rounded-2xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-primary" />
+            <div className="bg-white border-2 border-border rounded-3xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 text-white">
+                <Mail className="w-8 h-8" />
               </div>
               <h3 className="font-bold mb-2">Email</h3>
               <a href="mailto:info@qvault.ug" className="text-sm text-primary hover:underline">
@@ -41,9 +28,9 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="bg-white border border-border rounded-2xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-primary" />
+            <div className="bg-white border-2 border-border rounded-3xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 text-white">
+                <Phone className="w-8 h-8" />
               </div>
               <h3 className="font-bold mb-2">Phone</h3>
               <a href="tel:+256700000000" className="text-sm text-primary hover:underline">
@@ -51,9 +38,9 @@ export default function ContactPage() {
               </a>
             </div>
 
-            <div className="bg-white border border-border rounded-2xl p-6 text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-primary" />
+            <div className="bg-white border-2 border-border rounded-3xl p-6 text-center hover:shadow-xl hover:scale-105 transition-all">
+              <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-2xl flex items-center justify-center mx-auto mb-4 text-white">
+                <MapPin className="w-8 h-8" />
               </div>
               <h3 className="font-bold mb-2">Location</h3>
               <p className="text-sm text-muted-foreground">
@@ -62,8 +49,8 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="bg-white border border-border rounded-2xl p-8">
-            <h2 className="text-2xl font-bold mb-6">Send us a message</h2>
+          <div className="bg-white border-2 border-border rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all">
+            <h2 className="text-2xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Send us a message</h2>
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -103,7 +90,7 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition"
+                className="w-full py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-semibold hover:shadow-xl hover:scale-105 transition-all"
               >
                 Send Message
               </button>
@@ -111,6 +98,8 @@ export default function ContactPage() {
           </div>
         </div>
       </main>
+
+      <Footer />
     </div>
   )
 }

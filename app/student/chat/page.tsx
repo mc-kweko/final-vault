@@ -63,15 +63,15 @@ export default function ChatPage() {
   return (
     <div className="h-[calc(100vh-8rem)] flex gap-6">
       {/* Teachers List */}
-      <div className="w-80 bg-white border border-border rounded-2xl p-4 overflow-auto">
-        <h2 className="font-bold mb-4">Teachers</h2>
+      <div className="w-80 bg-white border-2 border-border rounded-3xl p-4 overflow-auto shadow-lg">
+        <h2 className="font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Teachers</h2>
         <div className="space-y-2">
           {teachers.map((teacher) => (
             <button
               key={teacher.id}
               onClick={() => setSelectedTeacher(teacher)}
-              className={`w-full text-left p-3 rounded-xl transition ${
-                selectedTeacher?.id === teacher.id ? 'bg-primary/10 border border-primary' : 'hover:bg-muted'
+              className={`w-full text-left p-3 rounded-xl transition-all ${
+                selectedTeacher?.id === teacher.id ? 'bg-gradient-to-r from-primary/10 to-accent/10 border-2 border-primary scale-105' : 'hover:bg-muted hover:scale-105'
               }`}
             >
               <div className="font-medium">{teacher.full_name || 'Teacher'}</div>
@@ -82,7 +82,7 @@ export default function ChatPage() {
       </div>
 
       {/* Chat Area */}
-      <div className="flex-1 bg-white border border-border rounded-2xl flex flex-col">
+      <div className="flex-1 bg-white border-2 border-border rounded-3xl flex flex-col shadow-lg">
         {selectedTeacher ? (
           <>
             <div className="p-6 border-b border-border">
@@ -99,7 +99,7 @@ export default function ChatPage() {
                   <div
                     className={`max-w-md px-4 py-3 rounded-2xl ${
                       msg.sender_id === user?.id
-                        ? 'bg-primary text-white'
+                        ? 'bg-gradient-to-r from-primary to-accent text-white shadow-md'
                         : 'bg-muted'
                     }`}
                   >
@@ -120,7 +120,7 @@ export default function ChatPage() {
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition"
+                  className="px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl font-medium hover:shadow-lg hover:scale-105 transition-all"
                 >
                   <Send className="w-5 h-5" />
                 </button>

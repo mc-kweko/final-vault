@@ -14,24 +14,24 @@ export default async function StudentDashboard() {
     .limit(5)
 
   const quickLinks = [
-    { name: 'Activities', href: '/student/activities', icon: BookOpen, color: 'bg-blue-500' },
-    { name: 'Past Papers', href: '/student/past-papers', icon: FileText, color: 'bg-rose-500' },
-    { name: 'Bookmarks', href: '/student/bookmarks', icon: Bookmark, color: 'bg-amber-500' },
+    { name: 'Activities', href: '/student/activities', icon: BookOpen, color: 'from-blue-500 to-blue-600' },
+    { name: 'Past Papers', href: '/student/past-papers', icon: FileText, color: 'from-rose-500 to-rose-600' },
+    { name: 'Bookmarks', href: '/student/bookmarks', icon: Bookmark, color: 'from-amber-500 to-amber-600' },
   ]
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Welcome Back!</h1>
-        <p className="text-muted-foreground">Continue your learning journey</p>
+        <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Welcome Back!</h1>
+        <p className="text-muted-foreground text-lg">Continue your learning journey</p>
       </div>
 
       {/* Quick Links */}
       <div className="grid md:grid-cols-3 gap-6">
         {quickLinks.map((link) => (
           <Link key={link.name} href={link.href} className="group">
-            <div className="bg-white border border-border rounded-2xl p-6 hover:shadow-lg transition">
-              <div className={`w-12 h-12 ${link.color} rounded-xl flex items-center justify-center text-white mb-4`}>
+            <div className="bg-white border-2 border-border rounded-3xl p-6 hover:shadow-xl hover:scale-105 hover:border-primary/30 transition-all">
+              <div className={`w-12 h-12 bg-gradient-to-br ${link.color} rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform`}>
                 <link.icon className="w-6 h-6" />
               </div>
               <h3 className="font-bold text-lg mb-1 flex items-center justify-between">
@@ -46,11 +46,11 @@ export default async function StudentDashboard() {
 
       {/* Subjects */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Subjects</h2>
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Subjects</h2>
         <div className="grid md:grid-cols-4 gap-4">
           {subjects?.slice(0, 8).map((subject) => (
             <Link key={subject.id} href={`/student/activities?subject=${subject.id}`}>
-              <div className="bg-white border border-border rounded-xl p-4 hover:shadow-md transition">
+              <div className="bg-white border-2 border-border rounded-2xl p-4 hover:shadow-lg hover:scale-105 hover:border-primary/30 transition-all">
                 <div className="font-semibold">{subject.name}</div>
                 <div className="text-xs text-muted-foreground mt-1">{subject.category}</div>
               </div>
@@ -61,8 +61,8 @@ export default async function StudentDashboard() {
 
       {/* Recent Bookmarks */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Recent Bookmarks</h2>
-        <div className="bg-white border border-border rounded-2xl divide-y divide-border">
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Recent Bookmarks</h2>
+        <div className="bg-white border-2 border-border rounded-3xl divide-y divide-border shadow-lg">
           {bookmarks && bookmarks.length > 0 ? (
             bookmarks.map((bookmark: any) => (
               <div key={bookmark.id} className="p-4 flex items-center gap-3">
@@ -90,7 +90,7 @@ export default async function StudentDashboard() {
           { label: 'Bookmarks', value: bookmarks?.length || 0, icon: Bookmark },
           { label: 'Downloads', value: '0', icon: BookOpen },
         ].map((stat) => (
-          <div key={stat.label} className="bg-white border border-border rounded-xl p-6">
+          <div key={stat.label} className="bg-white border-2 border-border rounded-2xl p-6 hover:shadow-lg hover:scale-105 transition-all">
             <stat.icon className="w-8 h-8 text-primary mb-3" />
             <div className="text-3xl font-bold mb-1">{stat.value}</div>
             <div className="text-sm text-muted-foreground">{stat.label}</div>

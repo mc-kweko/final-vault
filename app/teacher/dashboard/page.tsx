@@ -1,6 +1,6 @@
 import { createClient } from '@/lib/supabase/server'
 import Link from 'next/link'
-import { Upload, MessageCircle, FileText, TrendingUp } from 'lucide-react'
+import { Upload, MessageCircle, FileText, TrendingUp, ArrowRight } from 'lucide-react'
 
 export default async function TeacherDashboard() {
   const supabase = await createClient()
@@ -21,34 +21,40 @@ export default async function TeacherDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Teacher Dashboard</h1>
+        <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Teacher Dashboard</h1>
         <p className="text-muted-foreground">Manage your content and student interactions</p>
       </div>
 
       {/* Quick Actions */}
       <div className="grid md:grid-cols-3 gap-6">
         <Link href="/teacher/upload" className="group">
-          <div className="bg-white border border-border rounded-2xl p-6 hover:shadow-lg transition">
-            <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white mb-4">
+          <div className="bg-white border-2 border-border rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all">
+            <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
               <Upload className="w-6 h-6" />
             </div>
-            <h3 className="font-bold text-lg mb-1">Upload Content</h3>
+            <h3 className="font-bold text-lg mb-1 flex items-center justify-between">
+              Upload Content
+              <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition" />
+            </h3>
             <p className="text-sm text-muted-foreground">Add new activities and resources</p>
           </div>
         </Link>
 
         <Link href="/teacher/messages" className="group">
-          <div className="bg-white border border-border rounded-2xl p-6 hover:shadow-lg transition">
-            <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white mb-4">
+          <div className="bg-white border-2 border-border rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
               <MessageCircle className="w-6 h-6" />
             </div>
-            <h3 className="font-bold text-lg mb-1">Messages</h3>
+            <h3 className="font-bold text-lg mb-1 flex items-center justify-between">
+              Messages
+              <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition" />
+            </h3>
             <p className="text-sm text-muted-foreground">Respond to student questions</p>
           </div>
         </Link>
 
-        <div className="bg-white border border-border rounded-2xl p-6">
-          <div className="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center text-white mb-4">
+        <div className="bg-white border-2 border-border rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all">
+          <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-xl flex items-center justify-center text-white mb-4">
             <TrendingUp className="w-6 h-6" />
           </div>
           <h3 className="font-bold text-lg mb-1">Analytics</h3>
@@ -64,7 +70,7 @@ export default async function TeacherDashboard() {
           { label: 'Total Views', value: activities?.reduce((sum, a) => sum + (a.view_count || 0), 0) || 0, icon: TrendingUp },
           { label: 'Messages', value: '0', icon: MessageCircle },
         ].map((stat) => (
-          <div key={stat.label} className="bg-white border border-border rounded-xl p-6">
+          <div key={stat.label} className="bg-white border-2 border-border rounded-2xl p-6 hover:shadow-lg hover:scale-105 transition-all">
             <stat.icon className="w-8 h-8 text-primary mb-3" />
             <div className="text-3xl font-bold mb-1">{stat.value}</div>
             <div className="text-sm text-muted-foreground">{stat.label}</div>
@@ -74,8 +80,8 @@ export default async function TeacherDashboard() {
 
       {/* Recent Activities */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Recent Activities</h2>
-        <div className="bg-white border border-border rounded-2xl divide-y divide-border">
+        <h2 className="text-2xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Recent Activities</h2>
+        <div className="bg-white border-2 border-border rounded-3xl divide-y divide-border shadow-lg">
           {activities && activities.length > 0 ? (
             activities.map((activity: any) => (
               <div key={activity.id} className="p-4">

@@ -22,20 +22,20 @@ export default async function ActivitiesPage({ searchParams }: { searchParams: P
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Activities of Integration</h1>
+        <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Activities of Integration</h1>
         <p className="text-muted-foreground">Curriculum-aligned learning activities</p>
       </div>
 
       {/* Subject Filter */}
       <div className="flex gap-2 flex-wrap">
-        <Link href="/student/activities" className={`px-4 py-2 rounded-xl border transition ${!params.subject ? 'bg-primary text-white border-primary' : 'border-border hover:border-primary'}`}>
+        <Link href="/student/activities" className={`px-4 py-2 rounded-xl border-2 transition-all font-medium ${!params.subject ? 'bg-gradient-to-r from-primary to-accent text-white border-primary shadow-lg scale-105' : 'border-border hover:border-primary hover:scale-105'}`}>
           All Subjects
         </Link>
         {subjects?.map((subject) => (
           <Link
             key={subject.id}
             href={`/student/activities?subject=${subject.id}`}
-            className={`px-4 py-2 rounded-xl border transition ${params.subject === subject.id ? 'bg-primary text-white border-primary' : 'border-border hover:border-primary'}`}
+            className={`px-4 py-2 rounded-xl border-2 transition-all font-medium ${params.subject === subject.id ? 'bg-gradient-to-r from-primary to-accent text-white border-primary shadow-lg scale-105' : 'border-border hover:border-primary hover:scale-105'}`}
           >
             {subject.name}
           </Link>
@@ -46,10 +46,10 @@ export default async function ActivitiesPage({ searchParams }: { searchParams: P
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {activities?.map((activity: any) => (
           <Link key={activity.id} href={`/student/activities/${activity.id}`}>
-            <div className="bg-white border border-border rounded-2xl p-6 hover:shadow-lg transition h-full">
+            <div className="bg-white border-2 border-border rounded-3xl p-6 hover:shadow-xl hover:scale-105 transition-all h-full">
               <div className="flex items-start justify-between mb-3">
-                <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <BookOpen className="w-6 h-6 text-primary" />
+                <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-white">
+                  <BookOpen className="w-6 h-6" />
                 </div>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Eye className="w-4 h-4" />
