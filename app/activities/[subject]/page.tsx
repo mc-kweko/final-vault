@@ -105,34 +105,34 @@ export default function SubjectActivitiesPage() {
     <div className="min-h-screen bg-gradient-to-b from-muted to-background">
       <Header />
 
-      <main className="pt-32 pb-20 px-6">
+      <main className="pt-24 sm:pt-32 pb-12 sm:pb-20 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Back Button */}
-          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-all mb-8 group">
+          <Link href="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-all mb-6 sm:mb-8 group">
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            Back to Home
+            <span className="text-sm sm:text-base">Back to Home</span>
           </Link>
 
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+          <div className="text-center mb-8 sm:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               {subject} Activities
             </h1>
-            <p className="text-xl text-muted-foreground">Sample Activities of Integration - Sign up to access all content</p>
+            <p className="text-lg sm:text-xl text-muted-foreground">Sample Activities of Integration - Sign up to access all content</p>
           </div>
 
           {/* Activities Grid */}
-          <div className="grid gap-6 mb-12">
+          <div className="grid gap-4 sm:gap-6 mb-8 sm:mb-12">
             {activities.map((activity, index) => (
-              <div key={index} className="bg-white border-2 border-border rounded-2xl p-6 hover:shadow-xl hover:scale-[1.02] transition-all group">
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
+              <div key={index} className="bg-white border-2 border-border rounded-xl sm:rounded-2xl p-4 sm:p-6 hover:shadow-xl hover:scale-[1.02] transition-all group">
+                <div className="flex flex-col sm:flex-row items-start justify-between gap-4">
+                  <div className="flex-1 w-full">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-white font-bold">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-primary to-accent rounded-xl flex items-center justify-center text-white font-bold text-sm sm:text-base">
                         {index + 1}
                       </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors">
                           {activity.title}
                         </h3>
                         <p className="text-sm text-muted-foreground flex items-center gap-2">
@@ -142,8 +142,8 @@ export default function SubjectActivitiesPage() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <span className={`px-4 py-1.5 rounded-full text-xs font-semibold border-2 ${getDifficultyColor(activity.difficulty)}`}>
+                  <div className="flex flex-row sm:flex-col items-center sm:items-end gap-2 w-full sm:w-auto">
+                    <span className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs font-semibold border-2 ${getDifficultyColor(activity.difficulty)} flex-1 sm:flex-none text-center`}>
                       {activity.difficulty}
                     </span>
                     <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -157,20 +157,20 @@ export default function SubjectActivitiesPage() {
           </div>
 
           {/* Locked Content CTA */}
-          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-3xl p-12 text-center text-white relative overflow-hidden">
+          <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl sm:rounded-3xl p-8 sm:p-12 text-center text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20" />
             <div className="relative">
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-6">
-                <Lock className="w-10 h-10" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <Lock className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
-              <h2 className="text-4xl font-bold mb-4">Want to Access More Activities?</h2>
-              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Want to Access More Activities?</h2>
+              <p className="text-lg sm:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
                 Create a free account to unlock hundreds of Activities of Integration, past papers, and expert guidance
               </p>
-              <Link href="/auth/sign-up" className="inline-flex items-center gap-3 px-10 py-5 bg-white text-primary rounded-2xl font-bold text-lg hover:scale-105 hover:shadow-2xl transition-all">
+              <Link href="/auth/sign-up" className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-white text-primary rounded-xl sm:rounded-2xl font-bold text-base sm:text-lg hover:scale-105 hover:shadow-2xl transition-all">
                 Create Free Account
               </Link>
-              <p className="text-sm text-white/70 mt-6">No credit card required • Instant access</p>
+              <p className="text-sm text-white/70 mt-4 sm:mt-6">No credit card required • Instant access</p>
             </div>
           </div>
         </div>

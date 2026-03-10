@@ -38,13 +38,15 @@ export default async function StudentLayout({ children }: { children: React.Reac
 
   return (
     <div className="flex h-screen bg-gradient-to-br from-muted to-background">
-      {/* Sidebar */}
-      <aside className="w-64 bg-white/95 backdrop-blur-xl border-r border-border/50 flex flex-col shadow-lg">
-        <div className="p-8 border-b border-border">
-          <Link href="/" className="flex items-center gap-3 group">
-            <Image src="/qvault logo (2).png" alt="Q'Vault" width={80} height={80} className="rounded-xl group-hover:shadow-xl transition-all" />
+      {/* Mobile Sidebar Overlay */}
+      <div className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" style={{ display: 'none' }} id="sidebar-overlay" />
+      
+      <aside className="w-64 lg:w-64 bg-white/95 backdrop-blur-xl border-r border-border/50 flex flex-col shadow-lg fixed lg:relative inset-y-0 left-0 z-40 transform -translate-x-full lg:translate-x-0 transition-transform" id="sidebar">
+        <div className="p-6 lg:p-8 border-b border-border">
+          <Link href="/" className="flex items-center gap-2 lg:gap-3 group">
+            <Image src="/qvault logo (2).png" alt="Q'Vault" width={60} height={60} className="lg:w-20 lg:h-20 rounded-xl group-hover:shadow-xl transition-all" />
             <div>
-              <div className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Q'Vault</div>
+              <div className="text-lg lg:text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Q'Vault</div>
               <div className="text-xs text-muted-foreground font-semibold tracking-wider uppercase">Practice Makes Perfect !</div>
             </div>
           </Link>
@@ -86,8 +88,23 @@ export default async function StudentLayout({ children }: { children: React.Reac
       </aside>
 
       {/* Main */}
-      <main className="flex-1 overflow-auto">
-        <div className="p-8">{children}</div>
+      <main className="flex-1 overflow-auto lg:ml-0">
+        {/* Mobile Header */}
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-b border-border/50 p-4 flex items-center justify-between">
+          <button onClick={() => {
+            const sidebar = document.getElementById('sidebar')
+            const overlay = document.getElementById('sidebar-overlay')
+            sidebar?.classList.toggle('-translate-x-full')
+            if (overlay) overlay.style.display = overlay.style.display === 'none' ? 'block' : 'none'
+          }} className="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-muted transition-colors">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          <div className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Student Dashboard</div>
+          <div className="w-10" />
+        </div>
+        <div className="p-4 lg:p-8">{children}</div>
       </main>
     </div>
   )
