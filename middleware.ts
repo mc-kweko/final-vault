@@ -23,7 +23,29 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  await supabase.auth.getUser()
+  const { data: { user } } = await supabase.auth.getUser()
+  
+  if (!user && (request.nextUrl.pathname.startsWith('/student') || request.nextUrl.pathname.startsWith('/teacher'))) {
+    return NextResponse.redirect(new URL('/auth/login', request.url))
+  }
+
+  if (user) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .single()
+
+    // Redirect based on role to prevent loops
+    if (request.nextUrl.pathname.startsWith('/student') && profile?.role === 'teacher') {
+      return NextResponse.redirect(new URL('/teacher/dashboard', request.url))
+    }
+    
+    if (request.nextUrl.pathname.startsWith('/teacher') && profile?.role === 'student') {
+      return NextResponse.redirect(new URL('/student/dashboard', request.url))
+    }
+  }
+
   return response
 }
 

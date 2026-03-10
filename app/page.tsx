@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronLeft, ChevronRight, Play, Star, Users, BookOpen, Award, Mail, MessageCircle } from 'lucide-react'
+import Header from '@/components/Header'
 
 const slides = [
   {
@@ -69,33 +70,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen overflow-hidden">
-      {/* Header */}
-      <header className="fixed top-0 w-full bg-white/95 backdrop-blur-xl border-b border-border/50 z-50 shadow-lg">
-        <nav className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-4 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-primary to-accent rounded-2xl blur-md opacity-0 group-hover:opacity-30 transition-opacity" />
-              <Image src="/qvault logo (2).png" alt="Q'Vault" width={100} height={100} className="rounded-2xl shadow-md group-hover:shadow-xl transition-all relative" />
-            </div>
-            <div>
-              <div className="text-3xl font-bold bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">Q'Vault</div>
-              <div className="text-xs text-muted-foreground font-semibold tracking-wider uppercase">Practice Makes Perfect !</div>
-            </div>
-          </Link>
-          <div className="hidden md:flex items-center gap-10">
-            <Link href="/" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Home</Link>
-            <Link href="/about" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">About</Link>
-            <Link href="/resources" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Resources</Link>
-            <Link href="/auth/teacher-application" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Register As Facilitator</Link>
-            <Link href="/contact" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-110 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary after:transition-all hover:after:w-full">Contact</Link>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/auth/login" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all hover:scale-105">Sign In</Link>
-            <Link href="/auth/sign-up" className="px-7 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-sm font-bold hover:shadow-xl hover:scale-105 transition-all">Get Started</Link>
-          </div>
-        </nav>
-      </header>
-
+      <Header />
       <main className="pt-24">
         {/* Hero Banner */}
         <section className="bg-gradient-to-br from-primary via-accent to-primary py-12 px-6">

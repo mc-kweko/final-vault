@@ -16,9 +16,21 @@ export default function Header() {
           </div>
         </Link>
         
-        <Link href="/auth/sign-up" className="px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-sm font-bold hover:shadow-xl hover:scale-105 transition-all">
-          Register As Facilitator
-        </Link>
+        <div className="flex items-center gap-8">
+          <Link href="/" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all">Home</Link>
+          <Link href="/about" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all">About Us</Link>
+          <Link href="/resources" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all">Resources</Link>
+          <Link href="/contact" className="text-sm font-semibold text-foreground/80 hover:text-primary transition-all">Contact</Link>
+        </div>
+        
+        <div className="flex items-center gap-4">
+          <Link href="/auth/sign-up" className="px-6 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl text-sm font-bold hover:shadow-xl hover:scale-105 transition-all">
+            Get Started as Student
+          </Link>
+          <Link href="/auth/teacher-application" className="px-8 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-sm font-bold hover:shadow-xl hover:scale-105 transition-all">
+            Register As Facilitator
+          </Link>
+        </div>
       </nav>
     </header>
   )

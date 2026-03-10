@@ -16,7 +16,17 @@ export default async function TeacherLayout({ children }: { children: React.Reac
     .eq('id', user.id)
     .single()
 
-  if (profile?.role !== 'teacher') redirect('/student/dashboard')
+  if (profile?.role !== 'teacher') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Access Denied</h1>
+          <p className="text-muted-foreground mb-4">You don't have permission to access this page.</p>
+          <Link href="/" className="text-primary hover:underline">Go to Home</Link>
+        </div>
+      </div>
+    )
+  }
 
   const nav = [
     { name: 'Dashboard', href: '/teacher/dashboard', icon: LayoutDashboard },
